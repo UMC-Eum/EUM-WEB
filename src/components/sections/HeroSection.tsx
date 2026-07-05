@@ -8,10 +8,10 @@ import { scrollToSection } from '@/utils/scroll';
 
 export function HeroSection() {
   return (
-    <header className="bg-brand-soft pb-24 pt-36 lg:pb-32 lg:pt-48" id={SECTION_IDS.top}>
-      <Container className="grid items-center gap-14 lg:grid-cols-[1.1fr_.9fr] lg:gap-16">
+    <header className="bg-brand-soft pb-20 pt-32 sm:pb-24 sm:pt-36 lg:pb-32 lg:pt-48" id={SECTION_IDS.top}>
+      <Container className="grid min-w-0 items-center gap-14 lg:grid-cols-[1.1fr_.9fr] lg:gap-16">
         <Reveal className="text-center lg:text-left">
-          <span className="inline-flex items-center rounded-full bg-brand-tint px-6 py-2.5 text-base font-semibold text-brand">
+          <span className="inline-flex max-w-full items-center rounded-full bg-brand-tint px-5 py-2.5 text-center text-[15px] font-semibold text-brand sm:px-6 sm:text-base">
             A세대를 위한 프리미엄 AI 음성 매칭 및 소셜 플랫폼
           </span>
           <h1 className="my-6 text-4xl font-bold leading-tight tracking-[-0.02em] text-ink sm:text-5xl lg:text-[58px]">

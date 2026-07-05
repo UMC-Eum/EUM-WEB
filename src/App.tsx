@@ -10,7 +10,7 @@ import { TourSections } from '@/components/sections/TourSections';
 
 export default function App() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-white font-sans text-[18px] leading-relaxed text-body antialiased sm:text-[20px]">
+    <div className="min-h-screen overflow-x-hidden break-keep bg-white font-sans text-[18px] leading-relaxed text-body antialiased sm:text-[20px]">
       <Navigation />
       <HeroSection />
       <main>
