@@ -17,10 +17,10 @@ export function Footer() {
           </p>
         </div>
         <div className="flex flex-col items-start gap-5 sm:items-end">
-          <nav className="flex flex-wrap gap-x-5 gap-y-2 text-[14px] font-semibold text-muted" aria-label="이용정책">
+          <nav className="flex flex-wrap gap-x-5 gap-y-2 text-[14px] font-semibold text-muted" aria-label="고객 지원 및 이용정책">
             <a className="transition hover:text-brand" href="/">홈</a>
             {LEGAL_PAGE_KEYS.map((pageKey) => (
-              <a className="transition hover:text-brand" href={`/?page=${pageKey}`} key={pageKey}>
+              <a className="transition hover:text-brand" href={`/${pageKey}`} key={pageKey}>
                 {LEGAL_PAGES[pageKey].title}
               </a>
             ))}
@@ -33,7 +33,13 @@ export function Footer() {
             {copied ? '이메일 주소가 복사되었습니다' : `문의하기 · ${CONTACT_EMAIL}`}
           </button>
         </div>
-        <div className="w-full text-[13.5px] text-faint">© 2026 EUM (이음). All rights reserved.</div>
+        <div className="w-full text-[13.5px] leading-relaxed text-faint">
+          이음(EUM) · 대표 안선우 · 사업자등록번호 712-11-03106
+          <br />
+          문의 {CONTACT_EMAIL}
+          <br />
+          © 2026 이음. All rights reserved.
+        </div>
       </div>
     </footer>
   );
