@@ -14,7 +14,10 @@ export default function App() {
   const searchParams = new URLSearchParams(window.location.search);
   const pageParam = searchParams.get('page');
   const viewParam = searchParams.get('view');
-  const legalPage = LEGAL_PAGE_KEYS.includes(pageParam as LegalPageKey) ? (pageParam as LegalPageKey) : null;
+  const pathname = window.location.pathname.replace(/\/$/, '') || '/';
+  const pathPage = LEGAL_PAGE_KEYS.find((pageKey) => pathname === `/${pageKey}`);
+  const legacyPage = LEGAL_PAGE_KEYS.includes(pageParam as LegalPageKey) ? (pageParam as LegalPageKey) : null;
+  const legalPage = pathPage ?? legacyPage;
 
   return (
     <div className="min-h-screen overflow-x-hidden break-keep bg-white font-sans text-[18px] leading-relaxed text-body antialiased sm:text-[20px]">

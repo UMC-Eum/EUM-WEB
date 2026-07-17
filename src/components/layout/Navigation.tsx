@@ -11,7 +11,8 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const searchParams = new URLSearchParams(window.location.search);
   const activeView = searchParams.get('view');
-  const activePage = searchParams.get('page');
+  const pathname = window.location.pathname.replace(/\/$/, '') || '/';
+  const activePage = LEGAL_PAGE_KEYS.find((pageKey) => pathname === `/${pageKey}`) ?? searchParams.get('page');
   const scrolled = useScrolled();
 
   useEffect(() => {
@@ -62,7 +63,7 @@ export function Navigation() {
             </a>
           ))}
           <div className="flex flex-col gap-3 border-t border-line pt-5 lg:hidden">
-            <span className="text-sm font-bold text-faint">이용정책</span>
+            <span className="text-sm font-bold text-faint">고객 지원 및 이용정책</span>
             {LEGAL_PAGE_KEYS.map((pageKey) => (
               <a
                 key={pageKey}
@@ -70,7 +71,7 @@ export function Navigation() {
                   'text-left text-[16px] font-semibold transition-colors hover:text-brand',
                   activePage === pageKey ? 'text-brand' : 'text-body',
                 )}
-                href={`/?page=${pageKey}`}
+                href={`/${pageKey}`}
                 aria-current={activePage === pageKey ? 'page' : undefined}
               >
                 {LEGAL_PAGES[pageKey].title}
