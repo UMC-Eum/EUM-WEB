@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { HeartIcon } from '@/components/common/HeartIcon';
-import { NAV_ITEMS, NAV_SECTION_IDS } from '@/constants/nav';
-import { SECTION_IDS } from '@/constants/sections';
-import { useActiveSection } from '@/hooks/useActiveSection';
+import { LEGAL_PAGES, LEGAL_PAGE_KEYS } from '@/constants/legal';
+import { NAV_ITEMS } from '@/constants/nav';
 import { useScrolled } from '@/hooks/useScrolled';
 import { cn } from '@/utils/cn';
-import { scrollToSection } from '@/utils/scroll';
 
 const focusRing = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const activeId = useActiveSection(NAV_SECTION_IDS);
+  const searchParams = new URLSearchParams(window.location.search);
+  const activeView = searchParams.get('view');
+  const activePage = searchParams.get('page');
   const scrolled = useScrolled();
 
   useEffect(() => {
@@ -23,11 +23,6 @@ export function Navigation() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen]);
 
-  const navigate = (sectionId: string) => {
-    setIsOpen(false);
-    scrollToSection(sectionId);
-  };
-
   return (
     <nav
       className={cn(
@@ -36,15 +31,14 @@ export function Navigation() {
       )}
     >
       <div className="mx-auto flex h-[76px] max-w-[1160px] items-center justify-between px-6 sm:px-8">
-        <button
+        <a
           className={cn('flex items-center gap-2.5 text-[26px] font-extrabold tracking-[-0.02em] text-brand focus-visible:rounded-md', focusRing)}
-          type="button"
           aria-label="이음 홈"
-          onClick={() => navigate(SECTION_IDS.top)}
+          href="/"
         >
           <HeartIcon className="h-[30px] w-[30px]" />
           이음
-        </button>
+        </a>
 
         <div
           id="site-nav"
@@ -55,30 +49,45 @@ export function Navigation() {
           )}
         >
           {NAV_ITEMS.map((item) => (
-            <button
+            <a
               key={item.sectionId}
               className={cn(
                 'text-left text-[17px] font-semibold transition-colors hover:text-brand',
-                activeId === item.sectionId ? 'text-brand' : 'text-body',
+                activeView === item.sectionId ? 'text-brand' : 'text-body',
               )}
-              type="button"
-              onClick={() => navigate(item.sectionId)}
+              href={`/?view=${item.sectionId}`}
+              aria-current={activeView === item.sectionId ? 'page' : undefined}
             >
               {item.label}
-            </button>
+            </a>
           ))}
+          <div className="flex flex-col gap-3 border-t border-line pt-5 lg:hidden">
+            <span className="text-sm font-bold text-faint">이용정책</span>
+            {LEGAL_PAGE_KEYS.map((pageKey) => (
+              <a
+                key={pageKey}
+                className={cn(
+                  'text-left text-[16px] font-semibold transition-colors hover:text-brand',
+                  activePage === pageKey ? 'text-brand' : 'text-body',
+                )}
+                href={`/?page=${pageKey}`}
+                aria-current={activePage === pageKey ? 'page' : undefined}
+              >
+                {LEGAL_PAGES[pageKey].title}
+              </a>
+            ))}
+          </div>
         </div>
 
-        <button
+        <a
           className={cn(
             'hidden rounded-full bg-brand px-7 py-3 text-base font-bold text-white shadow-button transition hover:-translate-y-0.5 hover:bg-brand-strong lg:inline-flex',
             focusRing,
           )}
-          type="button"
-          onClick={() => navigate(SECTION_IDS.download)}
+          href="/?view=tour"
         >
           Coming Soon
-        </button>
+        </a>
 
         <button
           className={cn('text-[28px] text-ink focus-visible:rounded-md lg:hidden', focusRing)}
