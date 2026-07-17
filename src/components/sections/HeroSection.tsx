@@ -4,7 +4,6 @@ import { PhonePair } from '@/components/common/PhonePair';
 import { Reveal } from '@/components/common/Reveal';
 import { VoiceWave } from '@/components/common/VoiceWave';
 import { SECTION_IDS } from '@/constants/sections';
-import { scrollToSection } from '@/utils/scroll';
 
 export function HeroSection() {
   return (
@@ -28,8 +27,8 @@ export function HeroSection() {
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4 lg:justify-start">
-            <Button onClick={() => scrollToSection(SECTION_IDS.download)}>지금 시작하기</Button>
-            <Button variant="outline" onClick={() => scrollToSection(SECTION_IDS.features)}>
+            <Button onClick={() => window.location.assign('/?view=tour')}>지금 시작하기</Button>
+            <Button variant="outline" onClick={() => window.location.assign('/?view=features')}>
               서비스 소개
             </Button>
           </div>

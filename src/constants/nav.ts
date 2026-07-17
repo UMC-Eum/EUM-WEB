@@ -7,5 +7,3 @@ export const NAV_ITEMS: NavItem[] = [
   { label: '이용 방법', sectionId: SECTION_IDS.how },
   { label: '앱 둘러보기', sectionId: SECTION_IDS.tour },
 ];
-
-export const NAV_SECTION_IDS = NAV_ITEMS.map((item) => item.sectionId);
